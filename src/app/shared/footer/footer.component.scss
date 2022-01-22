@@ -1,0 +1,11 @@
+@import '/src/styles/colors';
+
+footer {
+  margin: 0;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  background-color: $headerBGC;
+}
