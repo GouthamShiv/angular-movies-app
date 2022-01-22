@@ -1,0 +1,32 @@
+@import '/src/styles/colors';
+
+header {
+  .navbar {
+    margin: 0;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: $headerBGC;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &-logo {
+      display: block;
+      img {
+        width: 60px;
+      }
+    }
+
+    &-links {
+      margin: 0;
+      padding: 0;
+      display: block;
+      list-style: none;
+      li {
+        display: inline;
+        margin-right: 15px;
+      }
+    }
+  }
+}
