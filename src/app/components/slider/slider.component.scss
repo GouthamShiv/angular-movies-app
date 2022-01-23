@@ -49,11 +49,29 @@
         font-size: 1.4rem;
       }
       .info {
+        display: flex;
         > span {
           &:not(:last-child)::after {
             content: '|';
             margin-left: 9px;
             margin-right: 9px;
+          }
+        }
+        .rating {
+          display: flex;
+          align-items: center;
+          .ico {
+            color: $gold;
+            margin-right: 5px;
+          }
+          &-value.good {
+            color: $good;
+          }
+          &-value.bad {
+            color: $bad;
+          }
+          &-value.average {
+            color: $average;
           }
         }
       }

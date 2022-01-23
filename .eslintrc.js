@@ -18,6 +18,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier', 'import'],
   rules: {
+    'import/prefer-default-export': 'never',
     'import/extensions': [
       'error',
       'ignorePackages',
