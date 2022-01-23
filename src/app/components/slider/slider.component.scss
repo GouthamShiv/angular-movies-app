@@ -1,0 +1,66 @@
+@import '/src/styles/colors';
+
+.slider {
+  height: 35rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background-color: black;
+  justify-content: space-between;
+  .slide {
+    height: 35rem;
+    display: flex;
+    position: relative;
+    &-bg {
+      flex: 1 1 auto;
+      display: flex;
+      position: relative;
+      &::after {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        display: block;
+        position: absolute;
+        background-image: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 1) 30%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+      &-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &-pane {
+      top: 5rem;
+      left: 5rem;
+      width: 45%;
+      position: absolute;
+      .name {
+        font-size: 2.8rem;
+      }
+      .meta {
+        color: $secondaryText;
+        font-size: 1.4rem;
+      }
+      .info {
+        > span {
+          &:not(:last-child)::after {
+            content: '|';
+            margin-left: 9px;
+            margin-right: 9px;
+          }
+        }
+      }
+      .desc {
+        line-height: 1.6;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
