@@ -13,4 +13,17 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  original_name: string;
+}
+
+export interface MovieDTO {
+  page: number;
+  results: Movie[];
+  total_results: number;
+  total_pages: number;
+}
+
+export enum Category {
+  movie = 'movie',
+  tv = 'tv',
 }

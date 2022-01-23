@@ -2,6 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Movie } from 'src/app/models/movie';
+import { IMAGE_SIZES } from 'src/app/constants/global';
 
 @Component({
   selector: 'slider',
@@ -16,8 +17,9 @@ import { Movie } from 'src/app/models/movie';
   ],
 })
 export class SliderComponent implements OnInit {
-  @Input() items: Movie[] = [];
   slideIdx: number = 0;
+  @Input() items: Movie[] = [];
+  readonly imageSizes = IMAGE_SIZES;
 
   ngOnInit(): void {
     setInterval(() => {
