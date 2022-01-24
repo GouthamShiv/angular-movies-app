@@ -1,5 +1,5 @@
 <slider [items]="popularMovies"></slider>
-<items-banner [items]="upcomingMovies" banner="Upcoming Movies"></items-banner>
-<items-banner [items]="topRatedMovies" banner="Top Rated Movies"></items-banner>
-<items-banner [items]="topRatedTVShows" banner="Top Rated TV Shows"></items-banner>
+<items-banner [items]="upcomingMovies" [category]="category.movie" banner="Upcoming Movies"></items-banner>
+<items-banner [items]="topRatedMovies" [category]="category.movie" banner="Top Rated Movies"></items-banner>
+<items-banner [items]="topRatedTVShows" [category]="category.tv" banner="Top Rated TV Shows"></items-banner>
 <!-- <pre>{{ movies | json }}</pre> -->

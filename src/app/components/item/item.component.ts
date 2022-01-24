@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IMAGE_SIZES } from 'src/app/constants/global';
-import { Movie } from 'src/app/models/movie';
+import { Category, Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'item',
@@ -9,5 +9,6 @@ import { Movie } from 'src/app/models/movie';
 })
 export class ItemComponent {
   @Input() item!: Movie;
+  @Input() category!: Category;
   readonly imageSizes = IMAGE_SIZES;
 }

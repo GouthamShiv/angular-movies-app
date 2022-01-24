@@ -1,4 +1,4 @@
-<a class="item">
+<a class="item" [routerLink]="'/' + category +'/' + item.id">
   <div class="item-rating" [ngClass]="item.vote_average >= 7 ? 'good' : item.vote_average >= 5 ? 'average' : 'bad'">
     <i class="ico">star</i>
     <span>{{item.vote_average}}</span>

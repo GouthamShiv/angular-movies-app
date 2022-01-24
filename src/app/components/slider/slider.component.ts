@@ -19,12 +19,15 @@ import { IMAGE_SIZES } from 'src/app/constants/global';
 export class SliderComponent implements OnInit {
   slideIdx: number = 0;
   @Input() items: Movie[] = [];
+  @Input() isBanner: boolean = false;
   readonly imageSizes = IMAGE_SIZES;
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.slideIdx = ++this.slideIdx % this.items.length;
-    }, 5000);
+    if (!this.isBanner) {
+      setInterval(() => {
+        this.slideIdx = ++this.slideIdx % this.items.length;
+      }, 5000);
+    }
   }
 
   getRatingCategory(rating: number): string {

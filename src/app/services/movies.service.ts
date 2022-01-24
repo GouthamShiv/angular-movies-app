@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category, MovieDTO } from '../models/movie';
+import { Category, Movie, MovieDTO } from '../models/movie';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -34,5 +34,9 @@ export class MoviesService {
           return of(res.results);
         }),
       );
+  }
+
+  getById(category: Category = Category.movie, id: string) {
+    return this.http.get<Movie>(`${this.baseURL}/${category}/${id}?api_key=${this.apiKey}`);
   }
 }

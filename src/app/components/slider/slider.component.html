@@ -2,7 +2,12 @@
   <ng-container *ngFor="let item of items; let idx = index">
     <div class="slide" *ngIf="idx == slideIdx" @slideFade>
       <div class="slide-bg">
-        <img class="slide-bg-img" [src]="imageSizes.backdrop_large + item.backdrop_path" [alt]="item.original_title">
+        <ng-container *ngIf="item.backdrop_path;else posterImg">
+          <img class="slide-bg-img" [src]="imageSizes.backdrop_large + item.backdrop_path" [alt]="item.original_title">
+        </ng-container>
+        <ng-template #posterImg>
+          <img class="slide-bg-img" [src]="imageSizes.poster_original + item.poster_path" [alt]="item.original_title">
+        </ng-template>
       </div>
       <div class="slide-pane">
         <h2 class="name">{{item.original_title}}</h2>

@@ -2,7 +2,7 @@
   <h2>{{banner}}</h2>
   <div class="grid">
     <div class="col-6 md:col-3 lg:col-2" *ngFor="let item of items">
-      <item [item]="item"></item>
+      <item [item]="item" [category]="category"></item>
     </div>
   </div>
 </div>
