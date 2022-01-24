@@ -14,6 +14,13 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
   original_name: string;
+  revenue: number;
+  runtime: number;
+  status: string;
+  genres: Genre[];
+  first_air_date: string;
+  last_air_date: string;
+  number_of_seasons: number;
 }
 
 export interface MovieDTO {
@@ -26,4 +33,9 @@ export interface MovieDTO {
 export enum Category {
   movie = 'movie',
   tv = 'tv',
+}
+
+export interface Genre {
+  id: number;
+  name: string;
 }

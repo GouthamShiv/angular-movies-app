@@ -13,3 +13,23 @@
     }
   }
 }
+
+.poster {
+  max-width: 100%;
+}
+
+.overview {
+  line-height: 1.5;
+}
+
+.stats {
+  display: flex;
+  margin-bottom: 10px;
+  .label {
+    width: 150px;
+    font-weight: bold;
+  }
+  .value {
+    color: $primaryText;
+  }
+}

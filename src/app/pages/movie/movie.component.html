@@ -2,7 +2,62 @@
   <slider [items]="[movie]" [isBanner]="true"></slider>
   <p-tabView>
     <p-tabPanel header="Overview">
-      Overview
+      <div class="grid">
+        <div class="col-12 md:col-3 lg:col-3">
+          <img class="poster" [src]="imageSizes.poster_medium + movie.poster_path"
+            alt="{{movie.title ? movie.title : movie.original_name}}">
+        </div>
+        <div class="col-12 md:col-9 lg:col-9">
+          <h2>Overview</h2>
+          <p class="overview">{{movie.overview}}</p>
+          <ng-container *ngIf="urlCategory === category.movie;else tvDate">
+            <div class="stats">
+              <div class="label">Release Date:</div>
+              <div class="value">{{movie.release_date | date}}</div>
+            </div>
+          </ng-container>
+          <ng-template #tvDate>
+            <div class="stats" *ngIf="movie.first_air_date">
+              <div class="label">First Air Date:</div>
+              <div class="value">{{movie.first_air_date | date}}</div>
+            </div>
+            <div class="stats" *ngIf="movie.last_air_date">
+              <div class="label">Last Air Date:</div>
+              <div class="value">{{movie.last_air_date | date}}</div>
+            </div>
+          </ng-template>
+          <div class="stats">
+            <div class="label">Language:</div>
+            <div class="value">{{movie.original_language | uppercase}}</div>
+          </div>
+          <ng-container *ngIf="urlCategory === category.movie;else seasons">
+            <div class="stats">
+              <div class="label">Revenue:</div>
+              <div class="value">{{movie.revenue | currency}}</div>
+            </div>
+          </ng-container>
+          <ng-template #seasons>
+            <div class="stats">
+              <div class="label">No. of seasons:</div>
+              <div class="value">{{movie.number_of_seasons}}</div>
+            </div>
+          </ng-template>
+          <div class="stats">
+            <div class="label">Duration:</div>
+            <div class="value">{{movie.runtime}} Minutes</div>
+          </div>
+          <div class="stats">
+            <div class="label">Genres:</div>
+            <div class="value">
+              <span *ngFor="let genre of movie.genres">{{genre.name}} </span>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="label">Status:</div>
+            <div class="value">{{movie.status}}</div>
+          </div>
+        </div>
+      </div>
     </p-tabPanel>
     <p-tabPanel header="Videos">
       Videos

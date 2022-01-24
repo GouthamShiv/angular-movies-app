@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IMAGE_SIZES } from 'src/app/constants/global';
 import { Category, Movie } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -10,13 +11,16 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MovieComponent implements OnInit {
   movie!: Movie;
+  category = Category;
+  urlCategory: Category = Category.movie;
+  readonly imageSizes = IMAGE_SIZES;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private moviesService: MoviesService) {}
 
   ngOnInit(): void {
-    const category = this.router.url.includes(Category.tv) ? Category.tv : Category.movie;
+    this.urlCategory = this.router.url.includes(Category.tv) ? Category.tv : Category.movie;
     this.activatedRoute.params.subscribe(({ id }) => {
-      switch (category) {
+      switch (this.urlCategory) {
         case Category.tv: {
           this.getData(id, Category.tv);
           break;
