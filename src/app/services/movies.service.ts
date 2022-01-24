@@ -23,4 +23,16 @@ export class MoviesService {
         }),
       );
   }
+
+  searchMovies(category: Category = Category.movie, page: number = 1) {
+    return this.http
+      .get<MovieDTO>(
+        `${this.baseURL}/${category}/popular?page=${page}&api_key=${this.apiKey}&language=${this.language}`,
+      )
+      .pipe(
+        switchMap((res) => {
+          return of(res.results);
+        }),
+      );
+  }
 }

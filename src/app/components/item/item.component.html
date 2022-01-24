@@ -4,8 +4,7 @@
     <span>{{item.vote_average}}</span>
   </div>
   <div class="item-img">
-    <img [src]="imageSizes.poster_medium + item.poster_path"
-      alt="{{item.original_title ? item.original_title : item.original_name}}">
+    <img [src]="imageSizes.poster_medium + item.poster_path" alt="{{item.title ? item.title : item.original_name}}">
   </div>
-  <div class="item-title">{{item.original_title ? item.original_title : item.original_name}}</div>
+  <div class="item-title">{{item.title ? item.title : item.original_name}}</div>
 </a>
