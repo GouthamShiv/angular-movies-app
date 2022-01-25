@@ -13,6 +13,8 @@ import { Category, Credits, Images, Movie, Video } from '../../models/movie';
 export class MovieComponent implements OnInit, OnDestroy {
   movie!: Movie;
 
+  similarData!: Movie[];
+
   category = Category;
 
   videos: Video[] = [];
@@ -39,6 +41,7 @@ export class MovieComponent implements OnInit, OnDestroy {
             this.getVideosData(id, Category.tv);
             this.getImagesData(id, Category.tv);
             this.getCreditsData(id, Category.tv);
+            this.getSimilarData(id, Category.tv);
             break;
           }
           case Category.movie: {
@@ -46,6 +49,7 @@ export class MovieComponent implements OnInit, OnDestroy {
             this.getVideosData(id, Category.movie);
             this.getImagesData(id, Category.movie);
             this.getCreditsData(id, Category.movie);
+            this.getSimilarData(id, Category.movie);
             break;
           }
           default: {
@@ -53,6 +57,7 @@ export class MovieComponent implements OnInit, OnDestroy {
             this.getVideosData(id, Category.movie);
             this.getImagesData(id, Category.movie);
             this.getCreditsData(id, Category.movie);
+            this.getSimilarData(id, Category.movie);
             break;
           }
         }
@@ -83,6 +88,12 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.credits = res;
       const casts = this.credits.cast.filter((cast) => cast.profile_path !== null);
       this.credits.cast = casts;
+    });
+  }
+
+  getSimilarData(id: string, category: Category): void {
+    this.moviesService.getSimilar(id, category).subscribe((res) => {
+      this.similarData = res;
     });
   }
 

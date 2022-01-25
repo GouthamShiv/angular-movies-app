@@ -1,7 +1,7 @@
 <a class="item" [routerLink]="'/' + category +'/' + item.id">
   <div class="item-rating" [ngClass]="item.vote_average >= 7 ? 'good' : item.vote_average >= 5 ? 'average' : 'bad'">
     <i class="ico">star</i>
-    <span>{{item.vote_average}}</span>
+    <span>{{item.vote_average | number: '1.0-1'}}</span>
   </div>
   <div class="item-img">
     <img [src]="imageSizes.poster_medium + item.poster_path" alt="{{item.title ? item.title : item.original_name}}">

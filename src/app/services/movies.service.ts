@@ -57,4 +57,12 @@ export class MoviesService {
   getCredits(id: string, category: Category = Category.movie) {
     return this.http.get<Credits>(`${this.baseURL}/${category}/${id}/credits?api_key=${this.apiKey}`);
   }
+
+  getSimilar(id: string, category: Category = Category.movie, count: number = 4) {
+    return this.http.get<MovieDTO>(`${this.baseURL}/${category}/${id}/similar?api_key=${this.apiKey}`).pipe(
+      switchMap((res) => {
+        return of(res.results.slice(0, count));
+      }),
+    );
+  }
 }
