@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "primeflex": "^3.1.2",
     "primeicons": "^5.0.0",
     "primeng": "^13.1.0",

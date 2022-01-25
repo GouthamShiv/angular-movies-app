@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category, Movie, MovieDTO } from '../models/movie';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Category, Movie, MovieDTO, VideoDTO } from '../models/movie';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MoviesService {
   baseURL: string = 'https://api.themoviedb.org/3';
+
   apiKey: string = 'fdb64b0d0951d5a59a9a08580a11d523';
+
   language: string = 'en-US';
 
   constructor(private http: HttpClient) {}
@@ -36,7 +38,15 @@ export class MoviesService {
       );
   }
 
-  getById(category: Category = Category.movie, id: string) {
+  getById(id: string, category: Category = Category.movie) {
     return this.http.get<Movie>(`${this.baseURL}/${category}/${id}?api_key=${this.apiKey}`);
+  }
+
+  getVideos(id: string, category: Category = Category.movie) {
+    return this.http.get<VideoDTO>(`${this.baseURL}/${category}/${id}/videos?api_key=${this.apiKey}`).pipe(
+      switchMap((res) => {
+        return of(res.results);
+      }),
+    );
   }
 }

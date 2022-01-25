@@ -39,3 +39,13 @@ export interface Genre {
   id: number;
   name: string;
 }
+
+export interface VideoDTO {
+  id: number;
+  results: Video[];
+}
+
+export interface Video {
+  site: string;
+  key: string;
+}
