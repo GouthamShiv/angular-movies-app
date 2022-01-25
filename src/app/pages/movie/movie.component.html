@@ -58,6 +58,23 @@
           </div>
         </div>
       </div>
+      <h2>CAST</h2>
+      <p-carousel *ngIf="credits" [value]="credits.cast" [numVisible]="6" [numScroll]="2">
+        <ng-template let-cast pTemplate="item">
+          <div class="actor">
+            <img [src]="imageSizes.poster_medium + cast.profile_path" [alt]="cast.name">
+            <span>{{cast.name}}</span>
+          </div>
+        </ng-template>
+      </p-carousel>
+      <h2>SIMILAR</h2>
+      <div class="container">
+        <div class="grid">
+          <div class="col-6 md:col-3 lg:col-3 align" *ngFor="let movie of similarData">
+            <item [item]="movie" [category]="urlCategory"></item>
+          </div>
+        </div>
+      </div>
     </p-tabPanel>
     <p-tabPanel header="Videos">
       <div class="grid">
@@ -79,23 +96,6 @@
       </div>
     </p-tabPanel>
   </p-tabView>
-  <h2>CAST</h2>
-  <p-carousel *ngIf="credits" [value]="credits.cast" [numVisible]="6" [numScroll]="2">
-    <ng-template let-cast pTemplate="item">
-      <div class="actor">
-        <img [src]="imageSizes.poster_medium + cast.profile_path" [alt]="cast.name">
-        <span>{{cast.name}}</span>
-      </div>
-    </ng-template>
-  </p-carousel>
-  <h2>SIMILAR</h2>
-  <div class="container">
-    <div class="grid">
-      <div class="col-6 md:col-3 lg:col-3 align" *ngFor="let movie of similarData">
-        <item [item]="movie" [category]="urlCategory"></item>
-      </div>
-    </div>
-  </div>
   <!-- <ng-container *ngIf="urlCategory === category.movie">
   <h2>SIMILAR</h2>
   <p-carousel *ngIf="similarMovies" [value]="similarMovies" [numVisible]="6" [numScroll]="2">
