@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SubSink } from 'subsink';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
 import { IMAGE_SIZES } from '../../constants/global';
-import { Category, Images, Movie, Video } from '../../models/movie';
+import { Category, Credits, Images, Movie, Video } from '../../models/movie';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.scss'],
 })
-export class MovieComponent implements OnInit {
+export class MovieComponent implements OnInit, OnDestroy {
   movie!: Movie;
 
   category = Category;
@@ -18,36 +19,45 @@ export class MovieComponent implements OnInit {
 
   images: Images | null = null;
 
+  credits: Credits | null = null;
+
   readonly imageSizes = IMAGE_SIZES;
 
   urlCategory: Category = Category.movie;
+
+  private subSink = new SubSink();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.urlCategory = this.router.url.includes(Category.tv) ? Category.tv : Category.movie;
-    this.activatedRoute.params.subscribe(({ id }) => {
-      switch (this.urlCategory) {
-        case Category.tv: {
-          this.getData(id, Category.tv);
-          this.getVideosData(id, Category.tv);
-          this.getImagesData(id, Category.tv);
-          break;
+    this.subSink.add(
+      this.activatedRoute.params.subscribe(({ id }) => {
+        switch (this.urlCategory) {
+          case Category.tv: {
+            this.getData(id, Category.tv);
+            this.getVideosData(id, Category.tv);
+            this.getImagesData(id, Category.tv);
+            this.getCreditsData(id, Category.tv);
+            break;
+          }
+          case Category.movie: {
+            this.getData(id, Category.movie);
+            this.getVideosData(id, Category.movie);
+            this.getImagesData(id, Category.movie);
+            this.getCreditsData(id, Category.movie);
+            break;
+          }
+          default: {
+            this.getData(id, Category.movie);
+            this.getVideosData(id, Category.movie);
+            this.getImagesData(id, Category.movie);
+            this.getCreditsData(id, Category.movie);
+            break;
+          }
         }
-        case Category.movie: {
-          this.getData(id, Category.movie);
-          this.getVideosData(id, Category.movie);
-          this.getImagesData(id, Category.movie);
-          break;
-        }
-        default: {
-          this.getData(id, Category.movie);
-          this.getVideosData(id, Category.movie);
-          this.getImagesData(id, Category.movie);
-          break;
-        }
-      }
-    });
+      }),
+    );
   }
 
   getData(id: string, category: Category): void {
@@ -66,5 +76,17 @@ export class MovieComponent implements OnInit {
     this.moviesService.getImages(id, category).subscribe((res) => {
       this.images = res;
     });
+  }
+
+  getCreditsData(id: string, category: Category): void {
+    this.moviesService.getCredits(id, category).subscribe((res) => {
+      this.credits = res;
+      const casts = this.credits.cast.filter((cast) => cast.profile_path !== null);
+      this.credits.cast = casts;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subSink.unsubscribe();
   }
 }

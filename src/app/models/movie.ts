@@ -55,3 +55,10 @@ export interface Images {
     file_path: string;
   }[];
 }
+
+export interface Credits {
+  cast: {
+    name: string;
+    profile_path: string;
+  }[];
+}

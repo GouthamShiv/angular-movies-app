@@ -33,3 +33,15 @@
     color: $primaryText;
   }
 }
+
+.actor {
+  padding: 10px;
+  img {
+    width: 100%;
+  }
+  span {
+    margin: 10px 0;
+    display: block;
+    text-align: center;
+  }
+}
