@@ -49,3 +49,9 @@ export interface Video {
   site: string;
   key: string;
 }
+
+export interface Images {
+  backdrops: {
+    file_path: string;
+  }[];
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { Category, Movie, MovieDTO, VideoDTO } from '../models/movie';
+import { Category, Images, Movie, MovieDTO, VideoDTO } from '../models/movie';
 
 @Injectable({
   providedIn: 'root',
@@ -48,5 +48,9 @@ export class MoviesService {
         return of(res.results);
       }),
     );
+  }
+
+  getImages(id: string, category: Category = Category.movie) {
+    return this.http.get<Images>(`${this.baseURL}/${category}/${id}/images?api_key=${this.apiKey}`);
   }
 }

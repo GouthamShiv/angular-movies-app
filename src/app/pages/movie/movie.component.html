@@ -69,7 +69,13 @@
       </div>
     </p-tabPanel>
     <p-tabPanel header="Photos">
-      Photos
+      <div class="grid">
+        <ng-container *ngFor="let image of images?.backdrops">
+          <div class="col-12 md:col-4 lg:col-4">
+            <p-image src="" alt="Image" width="250"></p-image>
+          </div>
+        </ng-container>
+      </div>
     </p-tabPanel>
   </p-tabView>
 </ng-container>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IMAGE_SIZES } from 'src/app/constants/global';
-import { Category, Movie, Video } from 'src/app/models/movie';
-import { MoviesService } from 'src/app/services/movies.service';
+import { MoviesService } from '../../services/movies.service';
+import { IMAGE_SIZES } from '../../constants/global';
+import { Category, Images, Movie, Video } from '../../models/movie';
 
 @Component({
   selector: 'app-movie',
@@ -15,6 +15,8 @@ export class MovieComponent implements OnInit {
   category = Category;
 
   videos: Video[] = [];
+
+  images: Images | null = null;
 
   readonly imageSizes = IMAGE_SIZES;
 
@@ -54,6 +56,12 @@ export class MovieComponent implements OnInit {
   getVideosData(id: string, category: Category) {
     this.moviesService.getVideos(id, category).subscribe((res) => {
       this.videos = res;
+    });
+  }
+
+  getImagesData(id: string, category: Category): void {
+    this.moviesService.getImages(id, category).subscribe((res) => {
+      this.images = res;
     });
   }
 }

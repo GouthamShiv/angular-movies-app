@@ -8,9 +8,8 @@ describe('ItemsBannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ItemsBannerComponent ]
-    })
-    .compileComponents();
+      declarations: [ItemsBannerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

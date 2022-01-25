@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Category, Movie } from 'src/app/models/movie';
+import { Category, Movie } from '../../models/movie';
 
 @Component({
   selector: 'items-banner',
@@ -8,6 +8,8 @@ import { Category, Movie } from 'src/app/models/movie';
 })
 export class ItemsBannerComponent {
   @Input() items: Movie[] = [];
+
   @Input() banner!: string;
+
   @Input() category!: Category;
 }
