@@ -31,16 +31,19 @@ export class MovieComponent implements OnInit {
         case Category.tv: {
           this.getData(id, Category.tv);
           this.getVideosData(id, Category.tv);
+          this.getImagesData(id, Category.tv);
           break;
         }
         case Category.movie: {
           this.getData(id, Category.movie);
           this.getVideosData(id, Category.movie);
+          this.getImagesData(id, Category.movie);
           break;
         }
         default: {
           this.getData(id, Category.movie);
           this.getVideosData(id, Category.movie);
+          this.getImagesData(id, Category.movie);
           break;
         }
       }
