@@ -1,7 +1,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { Category, Movie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
 
@@ -15,15 +16,22 @@ export class MoviesComponent implements OnInit {
 
   category = Category.tv;
 
-  constructor(private moviesService: MoviesService, private router: Router) {}
+  genreId: string | null = null;
+
+  constructor(private moviesService: MoviesService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.category = this.router.url.includes(Category.movie) ? Category.movie : Category.tv;
-    if (this.category === Category.movie) {
-      this.getPagedMovies(1);
-    } else {
-      this.getPagedTVShows(1);
-    }
+    this.activatedRoute.params.pipe(take(1)).subscribe(({ genreId }) => {
+      if (genreId) {
+        this.genreId = genreId;
+        this.getMoviesByGenre(genreId, 1);
+      } else if (this.category === Category.movie) {
+        this.getPagedMovies(1);
+      } else {
+        this.getPagedTVShows(1);
+      }
+    });
   }
 
   getPagedMovies(page: number = 1) {
@@ -38,11 +46,20 @@ export class MoviesComponent implements OnInit {
     });
   }
 
+  getMoviesByGenre(genreId: string, page: number) {
+    this.moviesService.getMoviesByGenre(genreId, page).subscribe((movies) => {
+      this.movies = movies;
+    });
+  }
+
   paginate(event: any) {
-    if (this.category === Category.movie) {
-      this.getPagedMovies(++event.page);
+    const pageNum = event.page + 1;
+    if (this.genreId) {
+      this.getMoviesByGenre(this.genreId, pageNum);
+    } else if (this.category === Category.movie) {
+      this.getPagedMovies(pageNum);
     } else {
-      this.getPagedTVShows(++event.page);
+      this.getPagedTVShows(pageNum);
     }
   }
 }

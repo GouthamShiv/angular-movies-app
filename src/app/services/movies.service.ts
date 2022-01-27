@@ -74,4 +74,16 @@ export class MoviesService {
       }),
     );
   }
+
+  getMoviesByGenre(genreId: string, page: number = 1) {
+    return this.http
+      .get<MovieDTO>(
+        `${this.baseURL}/discover/${Category.movie}?with_genres=${genreId}&page=${page}&api_key=${this.apiKey}`,
+      )
+      .pipe(
+        switchMap((res) => {
+          return of(res.results);
+        }),
+      );
+  }
 }
