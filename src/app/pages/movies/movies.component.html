@@ -4,7 +4,8 @@
       <div class="p-fluid">
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input type="text" pInputText placeholder="Search" /> <!-- [(ngModel)]="value3" -->
+          <input type="text" pInputText [placeholder]=[searchPlaceholder] [(ngModel)]="searchValue"
+            (change)="search()" />
         </span>
       </div>
     </div>

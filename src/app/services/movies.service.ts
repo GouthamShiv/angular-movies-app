@@ -27,10 +27,11 @@ export class MoviesService {
       );
   }
 
-  searchMovies(category: Category = Category.movie, page: number = 1) {
+  search(searchValue?: string | null, category: Category = Category.movie, page: number = 1) {
+    const url = searchValue ? `search/${category}` : `${category}/popular`;
     return this.http
       .get<MovieDTO>(
-        `${this.baseURL}/${category}/popular?page=${page}&api_key=${this.apiKey}&language=${this.language}`,
+        `${this.baseURL}/${url}?page=${page}&query=${searchValue}&api_key=${this.apiKey}&language=${this.language}`,
       )
       .pipe(
         switchMap((res) => {

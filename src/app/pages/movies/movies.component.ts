@@ -16,12 +16,19 @@ export class MoviesComponent implements OnInit {
 
   category = Category.tv;
 
+  searchPlaceholder = '';
+
   genreId: string | null = null;
+
+  searchValue: string | null = null;
 
   constructor(private moviesService: MoviesService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.category = this.router.url.includes(Category.movie) ? Category.movie : Category.tv;
+    const searchFor = this.category === Category.movie ? Category.movie : `${Category.tv} show`;
+    this.searchPlaceholder = `Search for your favorite ${searchFor} here!`;
+
     this.activatedRoute.params.pipe(take(1)).subscribe(({ genreId }) => {
       if (genreId) {
         this.genreId = genreId;
@@ -34,14 +41,14 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  getPagedMovies(page: number = 1) {
-    this.moviesService.searchMovies(Category.movie, page).subscribe((movies) => {
+  getPagedMovies(page: number = 1, searchValue?: string | null) {
+    this.moviesService.search(searchValue, Category.movie, page).subscribe((movies) => {
       this.movies = movies;
     });
   }
 
-  getPagedTVShows(page: number = 1) {
-    this.moviesService.searchMovies(Category.tv, page).subscribe((tvShows) => {
+  getPagedTVShows(page: number = 1, searchValue?: string | null) {
+    this.moviesService.search(searchValue, Category.tv, page).subscribe((tvShows) => {
       this.movies = tvShows;
     });
   }
@@ -60,6 +67,14 @@ export class MoviesComponent implements OnInit {
       this.getPagedMovies(pageNum);
     } else {
       this.getPagedTVShows(pageNum);
+    }
+  }
+
+  search() {
+    if (this.category === Category.movie) {
+      this.getPagedMovies(1, this.searchValue);
+    } else {
+      this.getPagedTVShows(1, this.searchValue);
     }
   }
 }
