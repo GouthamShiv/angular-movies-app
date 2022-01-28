@@ -20,7 +20,7 @@ export class MoviesComponent implements OnInit {
 
   genreId: string | null = null;
 
-  searchValue: string | null = null;
+  searchValue: string | undefined = undefined;
 
   constructor(private moviesService: MoviesService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
@@ -41,13 +41,13 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  getPagedMovies(page: number = 1, searchValue?: string | null) {
+  getPagedMovies(page: number = 1, searchValue?: string) {
     this.moviesService.search(searchValue, Category.movie, page).subscribe((movies) => {
       this.movies = movies;
     });
   }
 
-  getPagedTVShows(page: number = 1, searchValue?: string | null) {
+  getPagedTVShows(page: number = 1, searchValue?: string) {
     this.moviesService.search(searchValue, Category.tv, page).subscribe((tvShows) => {
       this.movies = tvShows;
     });
@@ -64,9 +64,9 @@ export class MoviesComponent implements OnInit {
     if (this.genreId) {
       this.getMoviesByGenre(this.genreId, pageNum);
     } else if (this.category === Category.movie) {
-      this.getPagedMovies(pageNum);
+      this.getPagedMovies(pageNum, this.searchValue);
     } else {
-      this.getPagedTVShows(pageNum);
+      this.getPagedTVShows(pageNum, this.searchValue);
     }
   }
 

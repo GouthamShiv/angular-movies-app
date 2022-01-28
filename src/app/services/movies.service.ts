@@ -27,7 +27,7 @@ export class MoviesService {
       );
   }
 
-  search(searchValue?: string | null, category: Category = Category.movie, page: number = 1) {
+  search(searchValue?: string, category: Category = Category.movie, page: number = 1) {
     const url = searchValue ? `search/${category}` : `${category}/popular`;
     return this.http
       .get<MovieDTO>(
