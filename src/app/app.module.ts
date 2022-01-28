@@ -3,10 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { PaginatorModule } from 'primeng/paginator';
-import { TabViewModule } from 'primeng/tabview';
 import { ImageModule } from 'primeng/image';
+import { TabViewModule } from 'primeng/tabview';
 import { CarouselModule } from 'primeng/carousel';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -43,6 +44,7 @@ import { GenresComponent } from './pages/genres/genres.component';
     TabViewModule,
     ImageModule,
     CarouselModule,
+    InputTextModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
