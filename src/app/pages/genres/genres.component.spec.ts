@@ -8,9 +8,8 @@ describe('GenresComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GenresComponent ]
-    })
-    .compileComponents();
+      declarations: [GenresComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
