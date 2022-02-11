@@ -13,9 +13,13 @@ header {
 
     &-logo {
       display: block;
-      img {
+      .icon {
         width: 60px;
       }
+    }
+
+    &-name {
+      display: none;
     }
 
     &-links {
@@ -26,6 +30,20 @@ header {
       li {
         display: inline;
         margin-right: 15px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1199px) {
+  header {
+    .navbar {
+      &-name {
+        display: block;
+        margin-left: 200px;
+        .name {
+          width: 600px;
+        }
       }
     }
   }
