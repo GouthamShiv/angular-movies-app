@@ -53,11 +53,7 @@ export class MovieComponent implements OnInit, OnDestroy {
             break;
           }
           default: {
-            this.getData(id, Category.movie);
-            this.getVideosData(id, Category.movie);
-            this.getImagesData(id, Category.movie);
-            this.getCreditsData(id, Category.movie);
-            this.getSimilarData(id, Category.movie);
+            console.error(`Unable to determine category! ${this.urlCategory}`);
             break;
           }
         }
@@ -67,7 +63,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   getData(id: string, category: Category): void {
     this.moviesService.getById(id, category).subscribe((res) => {
-      this.movie = res;
+      this.movie = res.data;
     });
   }
 
@@ -79,13 +75,13 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   getImagesData(id: string, category: Category): void {
     this.moviesService.getImages(id, category).subscribe((res) => {
-      this.images = res;
+      this.images = res.data;
     });
   }
 
   getCreditsData(id: string, category: Category): void {
     this.moviesService.getCredits(id, category).subscribe((res) => {
-      this.credits = res;
+      this.credits = res.data;
       const casts = this.credits.cast.filter((cast) => cast.profile_path !== null);
       this.credits.cast = casts;
     });

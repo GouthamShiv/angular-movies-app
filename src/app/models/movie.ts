@@ -24,10 +24,11 @@ export interface Movie {
 }
 
 export interface MovieDTO {
-  page: number;
-  results: Movie[];
-  total_results: number;
-  total_pages: number;
+  data: Movie;
+}
+
+export interface MoviesDTO {
+  data: { page: number; results: Movie[]; total_results: number; total_pages: number };
 }
 
 export enum Category {
@@ -41,8 +42,7 @@ export interface Genre {
 }
 
 export interface VideoDTO {
-  id: number;
-  results: Video[];
+  data: { id: number; results: Video[] };
 }
 
 export interface Video {
@@ -56,9 +56,26 @@ export interface Images {
   }[];
 }
 
+export interface ImagesDTO {
+  data: {
+    backdrops: {
+      file_path: string;
+    }[];
+  };
+}
+
 export interface Credits {
   cast: {
     name: string;
     profile_path: string;
   }[];
+}
+
+export interface CreditsDTO {
+  data: {
+    cast: {
+      name: string;
+      profile_path: string;
+    }[];
+  };
 }

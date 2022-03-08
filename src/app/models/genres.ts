@@ -1,5 +1,5 @@
 export interface GenresDTO {
-  genres: Genre[];
+  data: { genres: Genre[] };
 }
 
 export interface Genre {
